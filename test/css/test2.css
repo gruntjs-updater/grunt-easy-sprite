@@ -1,0 +1,6 @@
+/* @sprite:[../img/test2] => test2@2x.png?selector=.icon&alg=v */
+.icon{display:inline-block;}
+.icon-1{width:21px;height:16px;background:url(../img/test2/full.png);}
+.icon-2{width:20px;height:21px;background:url(../img/test2/headset.png);}
+.icon-3{width:17px;height:17px;background:url(../img/test2/record.png);}
+.icon-4{width:17px;height:17px;background:url(../img/test2/stop.png);}
