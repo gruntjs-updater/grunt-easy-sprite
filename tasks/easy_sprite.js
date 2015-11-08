@@ -35,6 +35,7 @@ module.exports = function(grunt) {
                     return true;
                 }
             }).map(function(filepath) {
+                grunt.file.write(f.dest);
                 return sprite({
                         src: filepath,
                         dest: f.dest,
