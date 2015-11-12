@@ -10,21 +10,27 @@
 
 var sprite = require('easy-sprite');
 var q = require('q');
+var path = require('path');
 
 module.exports = function(grunt) {
 
     grunt.registerMultiTask('easy_sprite', 'Grunt plugin for easy-sprite', function() {
         var done = this.async();
         var options = this.options({
-            margin: 10
+            margin: 10,
+            compress: false,
+            sourcemap: false
         });
         if(!options.spriteDir) {
             grunt.log.error('spriteDir must specific');
         }
 
+        grunt.file.mkdir(options.spriteDir);
+
         var promises = [];
         // Iterate over all specified file groups.
         this.files.forEach(function(f) {
+            grunt.file.mkdir(path.dirname(f.dest));
             // Concat specified files.
             var src = f.src.filter(function(filepath) {
                 // Warn on and remove invalid source files (if nonull was set).
@@ -35,17 +41,18 @@ module.exports = function(grunt) {
                     return true;
                 }
             }).map(function(filepath) {
-                grunt.file.write(f.dest);
                 return sprite({
                         src: filepath,
                         dest: f.dest,
                         spriteDir: options.spriteDir,
-                        margin: options.margin
+                        margin: options.margin,
+                        compress: options.compress,
+                        sourcemap: options.sourcemap
                     }, function(err) {
                         if(!err) {
                             grunt.log.writeln('File "' + f.dest + '" created.');
                         } else {
-                            grunt.log.warn(filepath + 'sprite error.');
+                            grunt.log.warn(filepath + ' sprite error.');
                         }
                     });
             });

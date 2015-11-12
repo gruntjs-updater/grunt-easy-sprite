@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 
     // Before generating any new files, remove any previously-created files.
     clean: {
-        tests: ['cssout', 'sprite']
+        tests: ['test/cssout', 'test/sprite']
     },
 
     // Configuration to be run (and then tested).
@@ -33,7 +33,9 @@ module.exports = function(grunt) {
         tests: {
             options: {
                 spriteDir: 'test/sprite',
-                margin: 20
+                margin: 20,
+                compress: true,
+                sourcemap: true
             },
             files: [
                 {
